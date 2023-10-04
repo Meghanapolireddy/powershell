@@ -1,0 +1,14 @@
+# Specify the path to your logs
+$logPath = "C:\Windows/Logs"
+
+# Specify the name of the zip file
+$zipFileName = "logs.zip"
+
+# Specify the S3 bucket name
+$s3Bucket = "Logs_bucket"
+
+# Compress logs to a zip file
+Compress-Archive -Path $logPath -DestinationPath $zipFileName -Force
+
+# Upload the zip file to S3
+aws s3 cp $zipFileName s3://$s3Bucket/
