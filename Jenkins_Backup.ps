@@ -1,0 +1,15 @@
+# Set Jenkins home directory path
+$jenkinsHome = "C:\windows\Jenkins\Home"
+
+# Set backup destination directory
+$backupDestination = "C:\Backup\"
+
+# Set backup file name with timestamp
+$timestamp = Get-Date -Format "yyyyMMddHHmmss"
+$backupFileName = "JenkinsBackup_$timestamp.zip"
+$backupFilePath = Join-Path $backupDestination $backupFileName
+
+# Compress Jenkins home directory to a zip file
+Compress-Archive -Path $jenkinsHome -DestinationPath $backupFilePath
+
+Write-Host "Jenkins backup completed. Backup saved to: $backupFilePath"
